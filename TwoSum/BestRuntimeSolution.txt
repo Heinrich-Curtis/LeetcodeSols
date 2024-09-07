@@ -1,0 +1,27 @@
+
+Beats 90% wrt runtime, 82% wrt memory, C
+----------------------------------------------------------
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    int* retArr = malloc(8);
+    *returnSize = 2;
+    int i,j, nums1,soughtAfter;
+    for (i = 0; i < numsSize; ++i)
+    {
+        nums1 = nums[i];
+        soughtAfter = target - nums1;
+        for (j = i + 1; j < numsSize; ++j)
+        {
+            if (nums[j] == soughtAfter)
+            {
+                retArr[0] = i;
+                retArr[1] = j;
+                break;
+            }
+        }
+    }
+    return retArr;
+    
+}

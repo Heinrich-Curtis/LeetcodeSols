@@ -1,0 +1,22 @@
+Beats 95% of submissions with regard to memory usage, 44% of submissions with regard to runtime, C++
+---------------------------------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> solutionIndices;
+        size_t array_size = nums.size();
+        for (int i = 0; i < array_size;++i)
+        {
+            int num1 = nums[i];
+            int soughtAfter = target - num1;
+            auto j = std::find(nums.begin() + i + 1,nums.end(), soughtAfter);
+            if (j != nums.end())
+            {
+                solutionIndices.push_back(i);
+                solutionIndices.push_back(std::distance(nums.begin(),j));
+                break;
+            }
+        }  
+        return solutionIndices;
+    }
+};
