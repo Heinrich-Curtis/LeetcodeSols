@@ -1,0 +1,21 @@
+Only better than like 40% in both regards, make this better
+bool isPalindrome(int x) {
+     char numStr[13] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0"; 
+     sprintf(numStr,"%d",x);
+        size_t strLen = strlen(numStr);
+        char c1, c2;
+        int firstIter = 0;
+        int lastIter = strLen - 1;
+        while (lastIter > firstIter)
+        {
+            c1 = numStr[firstIter];
+            c2 = numStr[lastIter];
+            if (c1 != c2)
+            {
+                return false;
+            }
+            ++firstIter;
+            --lastIter;
+        }
+        return true;
+}
