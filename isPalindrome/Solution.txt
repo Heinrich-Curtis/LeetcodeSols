@@ -1,21 +1,16 @@
-Only better than like 40% in both regards, make this better
+Beats 83% of submissions by runtime and 91% of submissions by memory usage, C
+--------------------------------------------------------------------------
 bool isPalindrome(int x) {
-     char numStr[13] = "\0\0\0\0\0\0\0\0\0\0\0\0\0\0"; 
-     sprintf(numStr,"%d",x);
-        size_t strLen = strlen(numStr);
-        char c1, c2;
-        int firstIter = 0;
-        int lastIter = strLen - 1;
-        while (lastIter > firstIter)
-        {
-            c1 = numStr[firstIter];
-            c2 = numStr[lastIter];
-            if (c1 != c2)
-            {
-                return false;
-            }
-            ++firstIter;
-            --lastIter;
-        }
-        return true;
+    //just take each digit from the number, build a new number with the digits, and compare the two
+    if (x < 0) return false;
+     int digit = 0, place = 0,temp = x;
+     unsigned long long reverse = 0;
+    while(temp)
+    {
+        digit = temp % 10;
+        temp /=10;
+        reverse*=10;
+        reverse += digit;
+    }
+    return reverse == x;
 }
