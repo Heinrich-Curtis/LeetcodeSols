@@ -15,9 +15,13 @@ bool isPalindrome(int x) {
     return reverse == x;
 }
 
+NOTE: This exact solution above (which is trivially portable from C to C++)
+is in the top 1% of C++ solutions by runtime and top 78% of memory usage
 
+===============================================================================
 
-C++ solution that doesn't convert number to string (though we do save into char array because all digits 0-9 guaranteed to fit in one byte)
+C++ solution that doesn't convert number to string (though we do save into char array because all digits 0-9 guaranteed to fit in one byte) using the "walk iterators and compare values" method
+
 Beats 72% of submissions by runtime and 78% of submissions by memory use
 ----------------------------------------------------------------
 class Solution {
