@@ -19,3 +19,38 @@ bool isPalindrome(int x) {
         }
         return true;
 }
+
+
+
+C++ solution that doesn't convert number to string (though we do save into char array because all digits 0-9 guaranteed to fit in one byte)
+Beats 72% of submissions by runtime and 78% of submissions by memory use
+----------------------------------------------------------------
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x < 0)  return false;
+     char numStr[13] = "\0\0\0\0\0\0\0\0\0\0\0\0";
+     int num = x, i = 0;
+     for (; i < 13; ++i){
+        numStr[i]= num % 10;
+        num/=10;
+        if (num == 0) break;
+     }
+        char c1, c2;
+        int firstIter = 0;
+        int lastIter = i;
+        while (lastIter > firstIter)
+        {
+            c1 = numStr[firstIter];
+            c2 = numStr[lastIter];
+            if (c1 != c2)
+            {
+                return false;
+            }
+            ++firstIter;
+            --lastIter;
+        }
+        return true;
+    }
+};
+
