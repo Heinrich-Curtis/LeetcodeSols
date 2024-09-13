@@ -101,3 +101,62 @@ public:
         return start;
     }
 };
+
+
+
+
+
+
+I made it cleaner to read, but this averages worse performance. It's essentially the same solution:
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        bool carryOver = false;
+        int digitSum = 0, val1 = 0, val2 = 0;
+        ListNode* start = nullptr;
+        ListNode* prev = start;
+        while (l1 || l2)
+        {
+            val1 = val2 = 0;
+            //cases where we've reached the end of one of them
+            if (l1)
+            {
+                val1 = l1->val;
+                l1 = l1->next;
+            }
+            if (l2)
+            {
+                val2 = l2->val;
+                l2 = l2->next;
+            }
+
+            digitSum = val1 + val2 + carryOver;
+            if (digitSum >= 10)
+            {
+                carryOver = true;
+                digitSum -= 10;
+            }
+            else
+            {
+                carryOver = false;
+            }
+            ListNode* newNode = new ListNode(digitSum);
+            if (prev)
+            {
+                prev->next = newNode;
+            }
+            else
+            {
+                start = newNode;
+            }
+            prev = newNode;
+        }
+        if (carryOver)
+        {
+            ListNode* newNode = new ListNode(carryOver);
+            prev->next = newNode;
+        }
+        return start;
+    }
+};
