@@ -1,0 +1,4 @@
+Since table can have repeats in all columns and solution specifies just the list of authors (which implies we don't want all the records that match), use distinct (which was unique in mysql. Requirement also specifies that the solution column should be called id and the results should be ordered in ascending order.
+------------------------------------------------------------------------------
+# Write your MySQL query statement below
+select distinct author_id as id from Views where author_id = viewer_id order by id asc;
