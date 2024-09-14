@@ -1,0 +1,5 @@
+This is another select, the only twist here is that there are some values for the column that we're selecting for that can be null, so I guess in mySQL we have to explicitly specify that we want the null records, or the records which aren't null that don't have the value we want to exclude, that's interesting. I forget if OracleDB worked that way
+=============================================================================
+
+# Write your MySQL query statement below
+select name from Customer where referee_id IS NULL or referee_id is not null and referee_id !='2';
