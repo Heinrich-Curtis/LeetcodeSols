@@ -1,0 +1,52 @@
+First attempt c++, beats 40% by runtime, 95% by memory usage
+===============================================================
+class Solution {
+public:
+    bool isValid(string s) {
+        std::vector<char> buffer;
+        char c;
+        for (int i = 0; i < s.size();++i)
+        {
+            c = s[i];
+            if ((c == '(') || (c == '[') || (c == '{')) buffer.push_back(c);
+            else
+            {
+                if (buffer.empty()) return false;
+                if (c == ')')
+                {
+                if (buffer.back() != '(')
+                {
+                    return false;
+                }
+                else
+                {
+                    buffer.pop_back();
+                }
+                }
+                else if (c == ']')
+                {
+                if (buffer.back() != '[')
+                {
+                    return false;
+                }
+                else
+                {
+                    buffer.pop_back();
+                }
+                }
+                else if (c == '}')
+                {
+                if (buffer.back() != '{')
+                {
+                    return false;
+                }
+                else
+                {
+                    buffer.pop_back();
+                }
+                }
+            }
+        }
+        return buffer.empty();
+    }
+};
