@@ -1,0 +1,4 @@
+This one is simple enough, just a select from with and. My submission only beats 26% of solutions by runtime, but A) I don't think making this more complicated has any value, and B) The top runtime solutions are exactly the same, so I guess this is due to use of the solution server or something and doesn't actually matter:
+
+# Write your MySQL query statement below
+select product_id from Products where low_fats = 'Y' and recyclable = 'Y';
