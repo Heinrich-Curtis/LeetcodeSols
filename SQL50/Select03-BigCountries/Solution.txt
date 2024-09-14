@@ -1,0 +1,4 @@
+Another pretty simple select. Note the problem says big if either condition is true, and that the way it's worded, we want >= (AT LEAST)
+===============================================================
+# Write your MySQL query statement below
+select name,population,area from World where area >= 3000000 or population >= 25000000;
