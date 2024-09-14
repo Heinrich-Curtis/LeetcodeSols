@@ -1,4 +1,6 @@
 First attempt c++, beats 40% by runtime, 95% by memory usage
+
+UPDATE: I ran the exact same code again and now it beats 100% by runtime and 95% by memory usage. This is basically the ideal solution.
 ===============================================================
 class Solution {
 public:
