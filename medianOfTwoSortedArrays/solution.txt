@@ -1,0 +1,25 @@
+The trivial solution here is just "shove the second array into the first one, sort the whole thing, and find the median as normal"
+
+Only beats 51% by runtime and 14% by memory usage:
+---------------------------------------------------
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        double median = 0.0;
+        vector<int> temp{nums1};
+        temp.insert(temp.end(),nums2.begin(),nums2.end());
+
+        std::sort(temp.begin(),temp.end());
+        //now everything is in one place, find the median
+        size_t tempSize = temp.size();
+        if (tempSize % 2)
+        {
+            median = (double) temp[tempSize/2];
+        }
+        else
+        {
+            median = ((double)(temp[tempSize/2] + temp[tempSize/2 -1])/2);
+        }
+        return median;
+    }
+};
