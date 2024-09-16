@@ -1,0 +1,6 @@
+# Write your MySQL query statement below
+select EmployeeUNI.unique_id,Employees.name from Employees left join EmployeeUNI on Employees.id = EmployeeUNI.id;
+
+#couple things going on here: use of each table name to identify unique rows, use of left join to say
+"select all the records from Employee UNI that match records in Employees based on the id that's shared
+between them". I guess the "null" value just comes for free with MySQL.

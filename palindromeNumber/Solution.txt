@@ -1,0 +1,55 @@
+Beats 83% of submissions by runtime and 91% of submissions by memory usage, C
+--------------------------------------------------------------------------
+bool isPalindrome(int x) {
+    //just take each digit from the number, build a new number with the digits, and compare the two
+    if (x < 0) return false;
+     int digit = 0, place = 0,temp = x;
+     unsigned long long reverse = 0;
+    while(temp)
+    {
+        digit = temp % 10;
+        temp /=10;
+        reverse*=10;
+        reverse += digit;
+    }
+    return reverse == x;
+}
+
+NOTE: This exact solution above (which is trivially portable from C to C++)
+is in the top 1% of C++ solutions by runtime and top 78% of memory usage
+
+===============================================================================
+
+C++ solution that doesn't convert number to string (though we do save into char array because all digits 0-9 guaranteed to fit in one byte) using the "walk iterators and compare values" method
+
+Beats 72% of submissions by runtime and 78% of submissions by memory use
+----------------------------------------------------------------
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if (x < 0)  return false;
+     char numStr[13] = "\0\0\0\0\0\0\0\0\0\0\0\0";
+     int num = x, i = 0;
+     for (; i < 13; ++i){
+        numStr[i]= num % 10;
+        num/=10;
+        if (num == 0) break;
+     }
+        char c1, c2;
+        int firstIter = 0;
+        int lastIter = i;
+        while (lastIter > firstIter)
+        {
+            c1 = numStr[firstIter];
+            c2 = numStr[lastIter];
+            if (c1 != c2)
+            {
+                return false;
+            }
+            ++firstIter;
+            --lastIter;
+        }
+        return true;
+    }
+};
+
