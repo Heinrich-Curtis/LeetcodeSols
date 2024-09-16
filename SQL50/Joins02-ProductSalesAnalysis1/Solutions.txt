@@ -1,0 +1,6 @@
+# Write your MySQL query statement below
+select Product.product_name, Sales.year, Sales.price from Product right join Sales on Product.product_id = Sales.product_id;
+
+So the one neat thing I learned is that left join and right join are exactly the same if you reposition the table names: so Product right join Sales on ... is equal to Sales left join Product ... 
+
+I guess this is what it means to say that both are outer joins
