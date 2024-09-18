@@ -1,0 +1,9 @@
+# Write your MySQL query statement below
+#I like this sub-query method, it makes sense to me. Only jank is the DATE_SUB function, I guess you can use any date units for the interval
+#select w1.id from Weather w1 where w1.temperature > (
+#select w2.temperature from Weather w2 where w2.recordDate = DATE_SUB(w1.recordDate, INTERVAL 1 DAY));
+
+#now do with joins. Here we use a self-join (which is just an inner join) on records where the difference between two records is one day. So w2 only contains records 2,3,4, and thus ths innter-join is only rows 2,3,4
+select w1.id from Weather w1 join Weather w2 on DATEDIFF(w1.recordDate, w2.recordDate) = 1
+#when we add this where clause, we get exactly what we want
+where w1.temperature > w2.temperature;
