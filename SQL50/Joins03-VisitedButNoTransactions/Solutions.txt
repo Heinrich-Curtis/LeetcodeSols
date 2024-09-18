@@ -7,3 +7,12 @@ WHERE TRANSACTIONS.amount IS NULL
 GROUP BY VISITS.customer_id;
 
 What's going on here: We want to find all the customers who visited but did not make a transaction, and we want to know how often they did that. So we want a count of every visit that doesn't have a transaction associated with it, grouped by the customer who made the visit.
+
+Note that for some reason, this does not pass the actual solution (there's an error reported in one test case). Here is a solution that passes, but it doesn't use a join, which is the point of this section:
+
+# Write your MySQL query statement below
+
+select customer_id , count(visit_id) as count_no_trans from Visits
+where
+visit_id not in (select  visit_id from Transactions)
+group by customer_id;
