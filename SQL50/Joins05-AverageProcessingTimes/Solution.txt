@@ -1,0 +1,6 @@
+# Write your MySQL query statement below
+#select machine_id, AVG(processing_time) FROM 
+
+#First, how do we find the processing time? We need a query where we find a start and a corresponding end (both should have smae process id and machine id), then we subtract them to get a processing time. Then we take the average of the processing times per machine id (this means grouping results by machine id or elase you only get one result). Lastly, we have to round the result appropriately.
+
+select a1.machine_id, ROUND(AVG(a2.timestamp - a1.timestamp),3) as processing_time from Activity a1 join Activity a2 using (machine_id,process_id) where a1.activity_type = 'start' and a2.activity_type = 'end' GROUP BY machine_id;
