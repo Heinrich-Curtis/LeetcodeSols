@@ -1,0 +1,6 @@
+What's going on: we need to know the number of exams each student has taken, which can be 0. First we cross-product the Students with the Subjects so our result set has every combination of Students and exams. Then with that we left join the Exams table. Our on conditions checks that the student took the exam and also that the subject is in the subject table (I don't quite understand what this second part is doing yet, looking at it more). 
+
+# Write your MySQL query statement below
+select Students.student_id,Students.student_name, Subjects.subject_name, COUNT(Examinations.student_id) as attended_exams from Students cross join subjects left join examinations on Students.student_id = examinations.student_id and Subjects.subject_name = Examinations.subject_name GROUP BY student_id, subject_name order by student_id,subject_name;
+
+
