@@ -1,0 +1,4 @@
+Here's this. The big pain is that there was a test case added where the average price is 0 and it wasn't showing up because of the using/where clause, so I had to add the second where condition to get the row to show up, then put the IFNULL condition back in the select to get it to show.
+
+# Write your MySQL query statement below
+select Prices.product_id, IFNULL(ROUND(SUM(Prices.price*UnitsSold.units)/SUM(UnitsSold.units),2),0) as average_price from Prices left join UnitsSold on Prices.product_id = UnitsSold.product_id where UnitsSold.purchase_date between Prices.start_date and Prices.end_date or Prices.product_id not in (select product_id from UnitsSold) group by product_id;
