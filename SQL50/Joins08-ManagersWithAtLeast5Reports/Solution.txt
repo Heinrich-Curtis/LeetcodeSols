@@ -1,0 +1,7 @@
+Want the name of managers with at least 5 reports. This is where HAVING comes in, because aggregate functions like COUNT can't be used in where clauses. We have to count the occurences of e2.id here because one of the test cases on leetcode has all null names and then the count doesn't work right. We left join on IDs that are also managers, group them by those IDs and then using having for the numerical constraint
+
+SELECT e1.name
+FROM employee e1
+LEFT JOIN employee e2 ON e1.id=e2.managerId
+GROUP BY e1.id
+HAVING COUNT(e2.id) >= 5;
