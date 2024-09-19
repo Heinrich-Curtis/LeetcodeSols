@@ -1,0 +1,21 @@
+This C++ solution beats 100% by runtime and 70+% by memory usage:
+
+class Solution {
+public:
+   string mergeAlternately(string word1, string word2) {
+        string result;
+        int i = 0;
+        while (i < word1.length() || i < word2.length()) {
+            if (i < word1.length()) {
+                result += word1[i];
+            }
+            if (i < word2.length()) {
+                result += word2[i];
+            }
+            i++;
+        }
+        return result;
+    }
+};
+
+I tried also doing this by using a stringstream instead and appending to the stringstream, then returning the built string, but this was WAY slower: only beat 20% by runtime and ~30% by memory usage. This flies in the face of what I was told about stringstreams: I was told modifying stringrstreams is way faster than manipulating strings directly because copies are expensive,etc. This is evidence that either something changed or that idea simply isn't correct.
