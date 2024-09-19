@@ -1,0 +1,4 @@
+The trick for this is how to calculate the average: in an imperative language like C++, we'd just save the number of confirms in a variable, then the total in another one and divide them. But in sql we can't do that. So instead what we do is we add 1 to a counter that tracks the confirms or 0 if it isn't, then we just average that to get the confirmation rate. Everything else is pretty straightforward.
+
+
+select s.user_id, Round(Avg(If(c.action='confirmed',1,0)),2) as confirmation_rate from Signups s left join Confirmations c on s.user_id = c.user_id  group by user_id;
