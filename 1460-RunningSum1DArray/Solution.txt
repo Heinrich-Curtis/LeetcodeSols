@@ -1,0 +1,30 @@
+Solution in C, beats 100% by runtime, 72% by memory usage
+--------------------------------------------------------
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* runningSum(int* nums, int numsSize, int* returnSize){
+    int size = numsSize * 4;
+    int* retArr = malloc(size);
+    *returnSize = numsSize;
+    memcpy(retArr,nums,size);
+    for (int i = 1; i < numsSize; ++i)
+    {
+        retArr[i] += retArr[i-1];
+    }
+    return retArr;
+}
+
+Solution in C++, somehow doesn't perform any better with runtime OR memory than a solution that allocates an entirely new vector, which I'm very suspect of. Also the C solution takes 0.3 more MB of ram despite not having any C++ stl overhead!?
+----------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> runningSum(vector<int>& nums) {
+        for (int i = 1; i < nums.size();++i)
+        {
+            nums[i] += nums[i-1];
+        }
+        return nums;
+
+    }
+};
