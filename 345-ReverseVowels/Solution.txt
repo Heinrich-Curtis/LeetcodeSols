@@ -1,0 +1,49 @@
+I was also able to find an intuitive solution to this: we put one iterator at the start and one at the end. As long as the forward iterator is before the reverse one, do the following: move the forward iterator to the next vowel, then move the reverse iterator to the previous vowel. If both found vowels, that means they're looking at different ones so we swap them (then increment both so we're not stuck in infinite loop). If the forward iterator doesn't find another vowe. before end of string, that means there was an even number of vowels and we found them all (this includes the 0 vowels case). If forward finds a vowel but reverse doesn't, that means there was an odd number of vowels (reverse is no longer greater than forward after arriving at the midpoint), which is fine becuase it also means we're done. In either case, break from the loop and return the arg (which we modified in place). Beats 96% of submissions by runtime, 45% by memory usage.
+===============================================================================
+
+class Solution {
+public:
+    string reverseVowels(string s) {
+        std::vector<char> vowels = {'a','A','e','E','i','I','o','O','u','U'};
+        size_t forwardIt = 0, reverseIt = s.size()-1;
+        bool foundVowelF = false, foundVowelR = false;
+        while (forwardIt < reverseIt)
+        {
+            foundVowelF = foundVowelR = false;
+            //send forwardIt to the first vowel
+            while (std::find(vowels.begin(),vowels.end(),s[forwardIt]) == vowels.end() && forwardIt < reverseIt)
+            {
+                ++forwardIt;
+            }
+            if (forwardIt >= reverseIt) //we're done, nothing more to find
+            {
+                break;
+            }
+            else
+            {
+                foundVowelF = true;
+                while (std::find(vowels.begin(),vowels.end(),s[reverseIt]) == vowels.end() && forwardIt < reverseIt)
+                {
+                    --reverseIt;
+                }
+                if (forwardIt >= reverseIt) //this means there was an odd number of vowels, which is fine becuase we're at
+                //the middle one so nothing more to do
+                {
+                    break;
+                }
+                else
+                {
+                    //both iterators found vowels, so we swap them
+                    char temp = s[forwardIt];
+                    s[forwardIt] = s[reverseIt];
+                    s[reverseIt] = temp;
+                    //then we have to increment the iterators so we don't get stuck
+                    ++forwardIt;
+                    --reverseIt;
+                }
+                //now we're good for main loop again
+            }
+        }
+        return s;
+    }
+};
