@@ -1,0 +1,43 @@
+C++ solution beats 100% of submissions by runtime, but only 20% by memory usage.As an interesting note on the effect of IO: if I uncomment the two debug couts, my runtime performance drops to 20% (from 0ms to 8ms), that's massive.
+=========================================================================
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        size_t oldMax = 0;
+        vector<bool> result; vector<int> newCandies = candies;
+        std::sort(newCandies.begin(),newCandies.end());
+        oldMax = newCandies[newCandies.size() -1 ];
+        //std::cout << "max value: " << newCandies[newCandies.size() -1 ];
+        for (int i = 0;i < candies.size();++i)
+        {
+            //std::cout << "candies[i]: " << candies[i] << ", extra candies: " << extraCandies << std::endl;
+            result.push_back(candies[i] + extraCandies >= oldMax);
+        }
+        return result;
+    }
+};
+
+
+
+Here's actually a much better solution using 2 passes: evidently the sort takes up so much time that it amortizes a second pass through the array. This solution maintains the beating 100% by runtime, but ALSO beats 80% by memory usage. Good enough. Once again, if I uncomment the couts, runtime goes into the toilet.
+==============================================================================
+class Solution {
+public:
+    vector<bool> kidsWithCandies(vector<int>& candies, int extraCandies) {
+        size_t oldMax = 0;
+        vector<bool> result;
+        for (int i = 0;i < candies.size();++i)
+        {
+            oldMax = (candies[i] >= oldMax ? candies[i]:oldMax);
+            candies[i] += extraCandies;
+        }
+        //std::cout << "oldMax: " << oldMax << std::endl;
+        //now the array is filled with all the extraValues and we know the oldMax, once more
+        for (int i = 0;i < candies.size();++i)
+        {
+            //std::cout << "candies[i]: " << candies[i] << ", extra candies: " << extraCandies << std::endl;
+            result.push_back(candies[i] >= oldMax);
+        }
+        return result;
+    }
+};
