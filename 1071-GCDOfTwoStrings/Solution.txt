@@ -1,0 +1,80 @@
+Here's the solution that came from my intuition: Find every divisor of the shorter string, then starting with the longest divisor, see if it also divides the larger string. The first one that does is the greatest common divisor. If the shorter string has no divisors, then the solution is empty. Beats 100% of submissions by runtime but only 11% by memory.
+=========================================================================
+class Solution {
+public:
+    string gcdOfStrings(string str1, string str2) {
+        //basic idea, put the shorter one second, then slide. The best possible case is that the full str2 exists in str1, which means the GCD is just str2. Otherwise it's some piece.
+        if (str1.size() < str2.size())
+        {
+            return gcdOfStrings(str2,str1);
+        }
+        size_t s1s = str1.size(), s2s = str2.size();
+        std::vector<string> divisors;
+        //The GCD of two strings must have a length that is the gcd of the two string sizes. ie, when str1 is ABCABC and str2 is ABC, the possible GCD can only have length 1 or 3 (since common divisors of 6 and 3 are only 1 and 3). So find the Common denominators of the two lengths, then check each of those
+        //find GCDs of the two lengths
+        std::string repeatUnit;
+        for (int i = s2s; i > 0; --i)
+        {
+            if ( s2s % i == 0)
+            {
+                //get that substring
+                repeatUnit = str2.substr(0,i);
+                size_t copies = str2.size() / repeatUnit.size();
+                std::string checkString;
+                for (int j = 0; j < copies; ++j)
+                {
+                    checkString += repeatUnit;
+                }
+                if (checkString != str2)
+                {
+                    repeatUnit = "";
+                    continue;
+                }
+                else
+                {
+                    divisors.push_back(repeatUnit);
+                }
+            }
+        }
+        //if we made it here, then there is no proper divisor of str2, so there's no GCD
+        if (divisors.empty()) return repeatUnit;
+        //check if the repeatUnit also divides the bigger string
+        for (int i = 0; i <divisors.size(); ++i)
+        {
+            std::string checkString;
+            repeatUnit = divisors[i];
+            size_t copies = str1.size() / repeatUnit.size();
+            for (int j = 0; j < copies; ++j)
+            {
+                checkString += repeatUnit;
+            }
+            //this is the longest one that does both
+            if (checkString != str1)
+            {
+                repeatUnit = "";
+                continue;
+            }
+            else
+            {
+                return repeatUnit;
+            }
+        }
+        return repeatUnit;
+
+    }
+};
+
+
+After completing the problem with my intuition, I checked the solutions and I see the one-liner:
+==========================================================================
+class Solution {
+public:
+    string gcdOfStrings(string str1, string str2) {
+        return (str1 + str2 == str2 + str1)?
+        str1.substr(0, gcd(size(str1),size(str2))): "";
+    }
+};
+
+I learned 2 things here: A) whenever dealing with math concepts, remember to think back to math, and B), I wasn't aware there was a gcd function in the std library.
+
+Sick
