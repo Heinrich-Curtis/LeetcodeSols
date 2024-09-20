@@ -1,0 +1,23 @@
+Did this one intuitively: put a stringstream on the string, push the words into a vector, pop them out of the vector into the return string. SS handles most of the whitespace crap, I only need to handle the trailing space which I do with conditional operator. Beats 81% of solutions by runtime, 35% by memory, good enough.
+====================================================================
+class Solution {
+public:
+    string reverseWords(string s) {
+        //just open a stream, put the words into a vector, then pop them out backward
+        std::vector<string> words;
+        std::string word;
+        std::stringstream wordsSS(s);
+        while (wordsSS >> word)
+        {
+            words.push_back(word);
+        }
+        word = "";
+        //everything is now in the vector, just pop it all out
+        for (int i = words.size() - 1; i >= 0; --i)
+        {
+            word +=  (words[i] + (i == 0? "":" "));
+        }
+
+        return word;
+    }
+};
