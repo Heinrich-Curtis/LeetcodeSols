@@ -1,0 +1,33 @@
+Intuitive solution: read all the values from the linked list into a vector, then go back through the list and put the values in reverse. First time submission was like 20% runtime, then I ran it twice more and it got 100% LOL
+==========================================================================
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        //run through the list twice: push all the values into a stack, then just put the new values into the nodes
+        std::vector<short> vals;
+        ListNode* iter = head;
+        while (iter != nullptr)
+        {
+            vals.push_back(iter->val);
+            iter = iter->next;
+        }
+        iter = head;
+        //now we have them all, put them back in
+        for (short  i = vals.size() - 1; i >= 0; --i)
+        {
+            iter->val = vals[i];
+            iter = iter->next;
+        }
+        return head;
+        }
+};
