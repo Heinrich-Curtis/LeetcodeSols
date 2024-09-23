@@ -29,3 +29,4 @@ public:
         inOrderRecurse(root);
         return solution;
      }
+};
