@@ -1,5 +1,5 @@
 // do it recursive and also iterative. Good learning here: we're allowed to create new class members
-//(for some reason I didn't think you could)
+//(for some reason I didn't think you could). Recursive solution beats 100% by runtime and ~70% by memory
 
 /**
  * Definition for a binary tree node.
