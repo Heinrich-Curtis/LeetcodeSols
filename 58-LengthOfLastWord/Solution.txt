@@ -1,0 +1,16 @@
+//The quick c++ way is just use a string stream, loop on it, then give back the length of the last word.
+//The longer but more memory-efficient way is to do what they did in K&R where you track if you're in
+//a word or out of one, then give by the number of characters in the last string.
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        std::string sub;
+        std::stringstream ss(s);
+        while (ss >> sub)
+        {
+            //do nothing
+        }
+        return sub.size();
+    }
+};
