@@ -1,0 +1,16 @@
+This course requires installation of following:
+python3
+pip
+jupyterlab
+
+You can check for jupyter with "pip show jupyterlab"
+
+Download the exercise files from Github (link on the LIL page)
+
+In Jupyter notebooks: 
+-Markdown mode lets you make titles and shit, using # for title, ## for smaller title, bold, italics, etc.
+-You can even do math equations in things, kind of like that one language needed in form lang. Look on a reference page for the format of this
+
+
+
+
